@@ -2,7 +2,7 @@
 
 import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 
 function App() {
@@ -10,12 +10,22 @@ function App() {
   let post = '강남 우동 맛집';
 
    // a는 state 보관 값, b는 state 변경 도움 함수
+   //let [a, b] = useState()
   let [글제목, 글제목변경] = useState(['남자 코트 추천','강남 우동 맛집','파이썬독학']);
   let [따봉, 따봉변경] = useState([0,0,0]);
   let [modal, setModal] = useState(false);
   let [title, setTitle] = useState(0);
   let [입력값, 입력값변경] = useState('');
-
+  
+  // 실시간 날짜
+  let today = new Date();
+  let time = {
+    year: today.getFullYear(),
+    month: today.getMonth()+1,
+    date: today.getDate()
+  }
+  let timestring = `${time.year}년 ${time.month}월 ${time.date}일`
+  
 
   
   return (
@@ -38,11 +48,12 @@ function App() {
                   copy[i] == 0 ? copy[i]++ : copy[i]--;
                   따봉변경(copy);
                 }}>👍</span> {따봉[i]}</h4>
-                <p>2월 17일 발행</p>
+                <p>{timestring}</p>
                 <button className="delBtn" onClick={()=>{
                   let copy = [...글제목];
                   copy.splice(i, 1)
                   글제목변경(copy)
+                  console.log(copy)
                 }}>삭제</button>
               </div>
     
@@ -74,6 +85,7 @@ function App() {
     </div>
     
     
+    
   );
 }
   function Modal(props){
@@ -86,6 +98,8 @@ function App() {
       </div>
     )
   }
+
+  
 
 
 
